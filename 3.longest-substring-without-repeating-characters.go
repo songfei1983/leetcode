@@ -9,14 +9,22 @@ package main
 // @lc code=start
 func lengthOfLongestSubstring(s string) int {
 	m := map[byte]int{}
-	n := map[byte]int{}
-	for _, v := range []byte(s) {
-		m[v]++
-		if m[v] > 1 {
-			n[v] = 1
+	bs := []byte(s)
+	max := 0
+	MaxInt := func(a, b int) int {
+		if a > b {
+			return a
 		}
+		return b
 	}
-	return len(n)
+	for i, j := 0, 0; i < len(bs); i++ {
+		if v, ok := m[bs[i]]; ok {
+			j = MaxInt(j, v+1)
+		}
+		m[bs[i]] = i
+		max = MaxInt(max, i-j+1)
+	}
+	return max
 }
 
 // @lc code=end
