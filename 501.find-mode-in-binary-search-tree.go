@@ -5,6 +5,8 @@ package main
  *
  * [501] Find Mode in Binary Search Tree
  */
+
+// TreeNode is struct
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode

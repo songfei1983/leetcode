@@ -6,9 +6,7 @@ package main
  * [21] Merge Two Sorted Lists
  */
 
-/**
- * Definition for singly-linked list.
- */
+// ListNode is struct
 type ListNode struct {
 	Val  int
 	Next *ListNode

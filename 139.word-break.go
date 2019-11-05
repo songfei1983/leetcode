@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 /*
  * @lc app=leetcode id=139 lang=golang
  *
@@ -8,29 +10,34 @@ package main
 
 // @lc code=start
 func wordBreak(s string, wordDict []string) bool {
-	memo := make([]bool, len(s))
-	mwd := map[string]bool{}
-	for _, v := range wordDict {
-		mwd[v] = true
+	memo := map[string]bool{}
+	dict := map[string]bool{}
+	for _, w := range wordDict {
+		dict[w] = true
 	}
-	return check([]byte(s), mwd, 0, memo)
+	return check(s, dict, memo)
 }
-
-func check(s []byte, wd map[string]bool, start int, memo []bool) bool {
-	if start >= len(s) {
+func check(s string, dict, memo map[string]bool) bool {
+	if contains(dict, s) {
 		return true
 	}
-	if memo[start] {
-		return true
+	if contains(memo, s) {
+		return false
 	}
-	for i := start + 1; i <= len(s); i++ {
-		if _, ok := wd[string(s[start:i])]; ok && check(s, wd, i, memo) {
-			memo[start] = true
-			return memo[start]
+	for w := range dict {
+		if strings.HasPrefix(s, w) {
+			if check(string([]byte(s)[len(w):]), dict, memo) {
+				return true
+			}
 		}
 	}
-	memo[start] = false
-	return memo[start]
+	memo[s] = false
+	return false
+}
+
+func contains(d map[string]bool, s string) bool {
+	_, ok := d[s]
+	return ok
 }
 
 // @lc code=end
