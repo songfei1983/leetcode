@@ -1,8 +1,6 @@
 package main
 
-import (
-	"strconv"
-)
+import "strconv"
 
 /*
  * @lc app=leetcode id=38 lang=golang
