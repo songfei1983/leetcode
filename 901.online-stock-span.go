@@ -7,26 +7,30 @@ package main
  */
 
 // @lc code=start
+
+// StockSpanner is struct
 type StockSpanner struct {
 	Prices []int
 	Index  int
 }
 
+// Constructor is func
 func Constructor() StockSpanner {
 	return StockSpanner{make([]int, 10000), 9999}
 }
 
-func (this *StockSpanner) Next(price int) int {
+// Next is func
+func (t *StockSpanner) Next(price int) int {
 	count := 0
-	this.Prices[this.Index] = price
-	for i := this.Index; i < 10000; i++ {
-		if price >= this.Prices[i] {
+	t.Prices[t.Index] = price
+	for i := t.Index; i < 10000; i++ {
+		if price >= t.Prices[i] {
 			count++
 		} else {
 			break
 		}
 	}
-	this.Index--
+	t.Index--
 	return count
 }
 
