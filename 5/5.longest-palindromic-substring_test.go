@@ -12,7 +12,7 @@ func Test_longestPalindrome(t *testing.T) {
 		want string
 	}{
 		{"", args{""}, ""},
-		{"babad", args{"babad"}, "aba"},
+		{"babad", args{"babad"}, "bab"},
 		{"cbbd", args{"cbbd"}, "bb"},
 		{"abba", args{"abba"}, "abba"},
 		{"ababaaaa", args{"ababaaaa"}, "ababa"},
