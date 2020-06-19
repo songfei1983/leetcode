@@ -19,23 +19,16 @@ type ListNode struct {
  * }
  */
 func middleNode(head *ListNode) *ListNode {
-	if head.Next == nil {
-		return head
-	}
-	var c int
-	n := head.Next
+	slow := head
+	fast := head
 	for {
-		n = n.Next
-		if n == nil {
+		if fast == nil || fast.Next == nil {
 			break
 		}
-		c++
+		slow = slow.Next
+		fast = fast.Next.Next
 	}
-	n = head.Next
-	for i := 0; i < c/2; i++ {
-		n = n.Next
-	}
-	return n
+	return slow
 }
 
 // @lc code=end
