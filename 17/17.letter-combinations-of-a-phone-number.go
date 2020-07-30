@@ -14,14 +14,14 @@ func letterCombinations(digits string) []string {
 		return nil
 	}
 	m := map[string][]string{
-		"2": []string{"a", "b", "c"},
-		"3": []string{"d", "e", "f"},
-		"4": []string{"g", "h", "i"},
-		"5": []string{"j", "k", "l"},
-		"6": []string{"m", "n", "o"},
-		"7": []string{"p", "q", "r", "s"},
-		"8": []string{"t", "u", "v"},
-		"9": []string{"w", "x", "y", "z"},
+		"2": {"a", "b", "c"},
+		"3": {"d", "e", "f"},
+		"4": {"g", "h", "i"},
+		"5": {"j", "k", "l"},
+		"6": {"m", "n", "o"},
+		"7": {"p", "q", "r", "s"},
+		"8": {"t", "u", "v"},
+		"9": {"w", "x", "y", "z"},
 	}
 	var merics [][]string
 	for _, v := range digits {
@@ -29,24 +29,23 @@ func letterCombinations(digits string) []string {
 			merics = append(merics, arr)
 		}
 	}
-	results = make([]string, 0)
-	result = make([]string, len(merics))
-	dfs(merics, 0)
-	return results
+	return dfs(merics, 0, nil)
 }
 
-var results []string
-var result []string
-
-func dfs(arr [][]string, depth int) {
+func dfs(arr [][]string, depth int, result []string) []string {
+	results := []string{}
+	if result == nil {
+		result = make([]string, len(arr))
+	}
 	for i := 0; i < len(arr[depth]); i++ {
 		result[depth] = arr[depth][i]
 		if depth < len(arr)-1 {
-			dfs(arr, depth+1)
+			results = append(results, dfs(arr, depth+1, result)...)
 		} else {
 			results = append(results, strings.Join(result, ""))
 		}
 	}
+	return results
 }
 
 // @lc code=end
